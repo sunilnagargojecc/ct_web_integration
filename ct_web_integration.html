@@ -73,14 +73,14 @@
 	</div>  
 	</form>
 	
-	<script>	
+	<script>			
+	function onUserLoginClick(){
+	
 	var cust_name = document.getElementById("custname").value;
 	var cust_email_id = document.getElementById("email").value;
 	var cust_phone_number = document.getElementById("phone").value;
 	var cust_dob = document.getElementById("dob").value;
 	var dob=new Date(cust_dob);
-		
-	function onUserLoginClick(){	
 	console.log(cust_name+" "+cust_email_id+" "+ cust_phone_number + " "+cust_dob);
 	
 	clevertap.onUserLogin.push({
@@ -96,6 +96,13 @@
 	}
 	
 	function onPushProfileClick(){
+	var cust_name = document.getElementById("custname").value;
+	var cust_email_id = document.getElementById("email").value;
+	var cust_phone_number = document.getElementById("phone").value;
+	var cust_dob = document.getElementById("dob").value;
+	var dob=new Date(cust_dob);
+	console.log(cust_name+" "+cust_email_id+" "+ cust_phone_number + " "+cust_dob);
+	
 	clevertap.profile.push({
 		"Site": {
 		"Name": cust_name,           
@@ -107,7 +114,14 @@
 	console.log("User Profile is updated");
 	}
 			
-	function onCreateEventClick(){	
+	function onCreateEventClick(){
+	var cust_name = document.getElementById("custname").value;
+	var cust_email_id = document.getElementById("email").value;
+	var cust_phone_number = document.getElementById("phone").value;
+	var cust_dob = document.getElementById("dob").value;
+	var dob=new Date(cust_dob);
+	console.log(cust_name+" "+cust_email_id+" "+ cust_phone_number + " "+cust_dob);
+	
 	var current_time = new Date();
 	var current_date = current_time.getFullYear()+'-'+(current_time.getMonth()+1)+'-'+current_time.getDate();
 	var current_time1 = current_time.getHours() + ":" + current_time.getMinutes() + ":" + current_time.getSeconds();
