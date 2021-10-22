@@ -1,0 +1,139 @@
+<html>
+<head>
+	<title>CleverTap Web SDK Integration</title>
+	<link rel="stylesheet" href="./style.css">
+	<script type="text/javascript">
+		var clevertap = {event:[], profile:[], account:[], onUserLogin:[], notifications:[], privacy:[]};
+		clevertap.account.push({"id": "Z44-Z4K-K65Z"});
+		clevertap.privacy.push({optOut: false}); 
+		clevertap.privacy.push({useIP: false}); 
+		(function () {
+		 var wzrk = document.createElement('script');
+		 wzrk.type = 'text/javascript';
+		 wzrk.async = true;
+		 wzrk.src = ('https:' == document.location.protocol ? 'https://d2r1yp2w7bby2u.cloudfront.net' : 'http://static.clevertap.com') + '/js/a.js';
+		 var s = document.getElementsByTagName('script')[0];
+		 s.parentNode.insertBefore(wzrk, s);
+		})();
+	</script>
+</head>
+	<body>
+	<!--<div class="container"></div>-->
+	<form>
+		<div class="container">
+				<div class="row">
+					<div class="col-10">
+						<label>Name</label>
+					</div>
+					<div class="col-90">
+						<input type="text" id ="custname" name="custname"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-10">
+						<label>Email Address</label>
+					</div>
+					<div class="col-90">
+						<input type="email" id="email" name="email"/>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-10">
+						<label>Phone Number</label>
+					</div>
+					<div class="col-90">
+						<input type="tel" id="phone" name="phone"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-10">
+						<label>Date of Birth</label>
+					</div>	
+					<div class="col-90">
+						<input type="date" id="dob" name="dob"/>
+					</div>
+				</div>
+		</br>
+		<div class="row">
+			<input type="button" value="Login" onclick="onUserLoginClick()"/>
+		</div> 
+		</br>
+		<div class="row">
+			<input type="button" value="Push Profile" onclick="onPushProfileClick()"/>
+		</div> 
+		</br>
+		<div class="row">
+			<input type="button" value="Create Event" onclick="onCreateEventClick()"/>
+		</div>
+		</br>		
+		<div class="row">
+			<input type="button" value="Ask For Push" onclick="onAskForPushClick()"/>
+		</div> 
+	
+	</div>  
+	</form>
+	
+	<script>	
+	var cust_name = document.getElementById("custname").value;
+	var cust_email_id = document.getElementById("email").value;
+	var cust_phone_number = document.getElementById("phone").value;
+	var cust_dob = document.getElementById("dob").value;
+	var dob=new Date(cust_dob);
+		
+	function onUserLoginClick(){	
+	console.log(cust_name+" "+cust_email_id+" "+ cust_phone_number + " "+cust_dob);
+	
+	clevertap.onUserLogin.push({
+		"Site": {
+		"Name": cust_name,           
+		"Email": cust_email_id,        
+		"Phone": cust_phone_number,        
+		"DOB": dob     
+		}
+	});	
+	
+	console.log("User Logged In");
+	}
+	
+	function onPushProfileClick(){
+	clevertap.profile.push({
+		"Site": {
+		"Name": cust_name,           
+		"Email": cust_email_id,        
+		"Phone": cust_phone_number,        
+		"DOB": dob
+		}
+	});
+	console.log("User Profile is updated");
+	}
+			
+	function onCreateEventClick(){	
+	var current_time = new Date();
+	var current_date = current_time.getFullYear()+'-'+(current_time.getMonth()+1)+'-'+current_time.getDate();
+	var current_time1 = current_time.getHours() + ":" + current_time.getMinutes() + ":" + current_time.getSeconds();
+	var current_dateTime = current_date+' '+current_time1;
+	
+	clevertap.event.push("Product Viewed", {
+		"Product name":"OnePlus 9 5G",
+		"Category":"Electronics",
+		"Price":46999.00,
+		"Viewed Date" : current_dateTime,
+		"Time Spent on Page Sec" : 20
+	});
+	console.log("Event is Created");
+	}	
+	
+	function onAskForPushClick(){
+	clevertap.notifications.push({
+		"titleText":'Would you like to receive Push Notifications?',
+		"bodyText":'We promise to only send you relevant content and give you updates on your transactions',
+		"okButtonText":'Sign me up!',
+		"rejectButtonText":'No thanks',
+		"askAgainTimeInSeconds":5,
+		"okButtonColor":'#f28046'});
+		console.log("Asked Perission for Web Push Notification");
+	}
+	</script>
+	</body>
+
+</html>
